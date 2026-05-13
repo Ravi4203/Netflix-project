@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone - Watch Unlimited Movies & TV Shows</title>
+    <link rel="stylesheet" href="styles.css?v=4">
+    <meta name="description" content="Watch unlimited movies, TV shows, and more on Netflix. Stream anywhere, cancel anytime.">
+</head>
+<body>
+    <div class="hero">
+        <div class="overlay"></div>
+        <header>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix Logo" class="logo">
+            <button class="signin-btn" type="button" onclick="openLoginModal()">Sign In</button>
+        </header>
+        <div class="hero-content">
+            <h1>Unlimited movies, TV shows, and more</h1>
+            <h2>Watch anywhere. Cancel anytime.</h2>
+            <p class="hero-subtitle">Ready to watch? Enter your email to create or restart your membership.</p>
+            <form class="signup-form" novalidate>
+                <input type="email" placeholder="Email address" required aria-label="Email address">
+                <button type="submit">Get Started &gt;</button>
+            </form>
+            <button class="subscribe-btn" onclick="openSubscribeModal()">Subscribe Now</button>
+        </div>
+    </div>
+    
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <div class="login-container">
+                <h2>Sign In</h2>
+                <form class="login-form" id="loginForm">
+                    <div class="form-group">
+                        <input type="email" id="loginEmail" placeholder="Email or phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="login-btn">Sign In</button>
+                </form>
+                <div class="form-footer">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe">Remember me</label>
+                    </div>
+                    <a href="#" class="help-link">Need help?</a>
+                </div>
+                <div class="signup-section">
+                    <p>New to Netflix? <a href="#" onclick="showSignupForm()">Sign up now</a></p>
+                </div>
+            </div>
+            
+            <!-- Sign Up Form (Hidden by default) -->
+            <div class="signup-container" id="signupContainer" style="display: none;">
+                <h2>Sign Up</h2>
+                <form class="signup-form-modal" id="signupFormModal">
+                    <div class="form-group">
+                        <input type="text" id="signupName" placeholder="Full name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="signupEmail" placeholder="Email address" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="signupPassword" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="signupConfirmPassword" placeholder="Confirm password" required>
+                    </div>
+                    <button type="submit" class="signup-btn">Create Account</button>
+                </form>
+                <div class="form-footer">
+                    <p>By signing up, you agree to our Terms of Service and Privacy Policy.</p>
+                </div>
+                <div class="signup-section">
+                    <p>Already have an account? <a href="#" onclick="showLoginForm()">Sign in</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Subscribe Modal -->
+    <div id="subscribeModal" class="modal">
+        <div class="modal-content subscribe-modal">
+            <span class="close" onclick="closeSubscribeModal()">&times;</span>
+            <div class="subscribe-container">
+                <div class="modal-header">
+                    <h2>Choose Your Plan</h2>
+                    <p class="subscribe-subtitle">Unlimited movies, TV shows, and more. Watch anywhere. Cancel anytime.</p>
+                    <div class="trial-badge">
+                        <span>🎬</span>
+                        <span>30-Day Free Trial</span>
+                    </div>
+                </div>
+                
+                <div class="plans-container">
+                    <div class="plan-card" data-plan="basic">
+                        <div class="plan-header">
+                            <h3>Basic</h3>
+                            <div class="plan-price">
+                                <span class="currency">$</span>
+                                <span class="amount">8.99</span>
+                                <span class="period">/month</span>
+                            </div>
+                            <div class="plan-savings">Save $2/month</div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li><span class="check">✓</span> Good video quality</li>
+                                <li><span class="check">✓</span> Resolution 480p</li>
+                                <li><span class="check">✓</span> Watch on your TV or computer</li>
+                                <li><span class="check">✓</span> Watch on your mobile phone or tablet</li>
+                                <li><span class="check">✓</span> Download on 1 device</li>
+                            </ul>
+                        </div>
+                        <button class="plan-btn" onclick="selectPlan('basic')">
+                            <span>Select Basic</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </div>
+                    
+                    <div class="plan-card popular" data-plan="standard">
+                        <div class="popular-badge">
+                            <span>🔥</span>
+                            <span>Most Popular</span>
+                        </div>
+                        <div class="plan-header">
+                            <h3>Standard</h3>
+                            <div class="plan-price">
+                                <span class="currency">$</span>
+                                <span class="amount">13.99</span>
+                                <span class="period">/month</span>
+                            </div>
+                            <div class="plan-savings">Save $3/month</div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li><span class="check">✓</span> Better video quality</li>
+                                <li><span class="check">✓</span> Resolution 1080p</li>
+                                <li><span class="check">✓</span> Watch on your TV, computer, mobile or tablet</li>
+                                <li><span class="check">✓</span> Unlimited movies and TV shows</li>
+                                <li><span class="check">✓</span> Download on 2 devices</li>
+                            </ul>
+                        </div>
+                        <button class="plan-btn popular-btn" onclick="selectPlan('standard')">
+                            <span>Select Standard</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </div>
+                    
+                    <div class="plan-card" data-plan="premium">
+                        <div class="plan-header">
+                            <h3>Premium</h3>
+                            <div class="plan-price">
+                                <span class="currency">$</span>
+                                <span class="amount">17.99</span>
+                                <span class="period">/month</span>
+                            </div>
+                            <div class="plan-savings">Save $4/month</div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li><span class="check">✓</span> Best video quality</li>
+                                <li><span class="check">✓</span> Resolution 4K+HDR</li>
+                                <li><span class="check">✓</span> Watch on your TV, computer, mobile or tablet</li>
+                                <li><span class="check">✓</span> Unlimited movies and TV shows</li>
+                                <li><span class="check">✓</span> Download on 4 devices</li>
+                                <li><span class="check">✓</span> Watch on 4 screens at the same time</li>
+                            </ul>
+                        </div>
+                        <button class="plan-btn" onclick="selectPlan('premium')">
+                            <span>Select Premium</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="subscribe-footer">
+                    <div class="trial-info">
+                        <p>🎬 <strong>30-Day Free Trial</strong> - Cancel anytime during your trial</p>
+                        <p>💳 <strong>No commitment</strong> - Cancel your subscription anytime</p>
+                    </div>
+                    <div class="payment-methods">
+                        <span>Secure payment methods:</span>
+                        <div class="payment-icons">
+                            <span title="Credit Cards">💳</span>
+                            <span title="Debit Cards">🏦</span>
+                            <span title="Digital Wallets">📱</span>
+                            <span title="PayPal">💳</span>
+                        </div>
+                    </div>
+                    <div class="security-badge">
+                        <span>🔒</span>
+                        <span>256-bit SSL encryption</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <section class="thumbnails">
+        <h3>Popular on Netflix</h3>
+        <div class="thumb-row">
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/6/62/Glass_Onion_poster.jpg" alt="Glass Onion: A Knives Out Mystery poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">Glass Onion: A Knives Out Mystery</h4>
+                <p class="movie-meta">Mystery, Comedy, Crime (2022)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/5/59/The_Gray_Man_poster.png" alt="The Gray Man poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">The Gray Man</h4>
+                <p class="movie-meta">Action, Thriller (2022)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Red_Notice_-_film_promotional_image.jpg" alt="Red Notice poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">Red Notice</h4>
+                <p class="movie-meta">Action, Comedy, Crime (2021)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Extraction_2_poster.jpg" alt="Extraction 2 poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">Extraction 2</h4>
+                <p class="movie-meta">Action, Thriller (2023)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/d/d7/The_Adam_Project_poster.png" alt="The Adam Project poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">The Adam Project</h4>
+                <p class="movie-meta">Sci-Fi, Adventure, Comedy (2022)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/4/4b/Enola_Holmes_2_poster.png" alt="Enola Holmes 2 poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">Enola Holmes 2</h4>
+                <p class="movie-meta">Adventure, Crime, Drama (2022)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/5/5c/Don%27t_Look_Up_2021_film.jpg" alt="Don't Look Up poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">Don't Look Up</h4>
+                <p class="movie-meta">Comedy, Drama, Sci-Fi (2021)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/6/63/The_Mother_poster.jpg" alt="The Mother poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">The Mother</h4>
+                <p class="movie-meta">Action, Thriller (2023)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/0/07/The_Pale_Blue_Eye_poster.jpg" alt="The Pale Blue Eye poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">The Pale Blue Eye</h4>
+                <p class="movie-meta">Crime, Horror, Mystery (2022)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/7/75/You_People_Film_Poster.jpg" alt="You People poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">You People</h4>
+                <p class="movie-meta">Comedy, Romance (2023)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/0/09/The_Sea_Beast_film_poster.png" alt="The Sea Beast poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">The Sea Beast</h4>
+                <p class="movie-meta">Animation, Adventure, Comedy (2022)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/c/c5/The_School_for_Good_and_Evil_movie_poster.jpeg" alt="The School for Good and Evil poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">The School for Good and Evil</h4>
+                <p class="movie-meta">Action, Drama, Fantasy (2022)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/7/73/Heart_of_Stone_2023_poster.jpg" alt="Heart of Stone poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">Heart of Stone</h4>
+                <p class="movie-meta">Action, Thriller (2023)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/2/2d/Leave_the_World_Behind_film_poster.png" alt="Leave the World Behind poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">Leave the World Behind</h4>
+                <p class="movie-meta">Drama, Mystery, Thriller (2023)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/b/b5/Luther_-_The_Fallen_Sun_%282023%29_Poster.jpg" alt="Luther: The Fallen Sun poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">Luther: The Fallen Sun</h4>
+                <p class="movie-meta">Crime, Drama, Mystery (2023)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/b/bd/Bird_Box_%28film%29.png" alt="Bird Box poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">Bird Box</h4>
+                <p class="movie-meta">Horror, Sci-Fi, Thriller (2018)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/8/80/The_Irishman_poster.jpg" alt="The Irishman poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">The Irishman</h4>
+                <p class="movie-meta">Crime, Drama (2019)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/8/82/Army_of_the_Dead_poster.png" alt="Army of the Dead poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">Army of the Dead</h4>
+                <p class="movie-meta">Action, Horror, Thriller (2021)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/0/02/The_Old_Guard_2020_film_poster.png" alt="The Old Guard poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">The Old Guard</h4>
+                <p class="movie-meta">Action, Fantasy (2020)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/5/55/MarriageStoryPoster.png" alt="Marriage Story poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">Marriage Story</h4>
+                <p class="movie-meta">Drama, Romance (2019)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/8/85/Roma_theatrical_poster.png" alt="Roma poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">Roma</h4>
+                <p class="movie-meta">Drama (2018)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/1/13/Maestro_poster.png" alt="Maestro poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">Maestro</h4>
+                <p class="movie-meta">Biography, Drama, Romance (2023)</p>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/c/c3/All_quiet_on_the_western_front_%282022_film%29.jpg" alt="All Quiet on the Western Front poster" loading="lazy">
+                </div>
+                <h4 class="movie-title">All Quiet on the Western Front</h4>
+                <p class="movie-meta">Action, Drama, War (2022)</p>
+            </div>
+        </div>
+    </section>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
